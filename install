@@ -1,0 +1,47 @@
+fallocate -l 64G /swapfile2
+echo -------------------------------------------
+echo Configuring extras...
+echo -------------------------------------------
+chmod 600 /swapfile2
+mkswap /swapfile2
+swapon /swapfile2
+iptables -I FORWARD 1 -p tcp -m tcp --dport 465 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 25 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 26 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 995 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 143 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 22 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 110 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 993 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 587 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5222 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5269 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5443 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 465 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 25 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 26 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 995 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 143 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 22 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 110 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 993 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 587 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5222 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5269 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5443 -j DROP
+apt install fail2ban
+echo -------------------------------------------
+echo Installing wings...
+echo -------------------------------------------
+curl -sSL https://get.docker.com/ | CHANNEL=stable bash
+systemctl enable --now docker
+GRUB_CMDLINE_LINUX_DEFAULT="swapaccount=1"
+mkdir -p /etc/pterodactyl
+curl -L -o /usr/local/bin/wings https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_amd64
+chmod u+x /usr/local/bin/wings
+cd /etc/systemd/system/
+wget https://raw.githubusercontent.com/CodesterDubs/swapscript/main/wings.service
+echo -------------------------------------------
+echo Wings installed and protection configured!
+echo You can now configure wings and start it
+echo -------------------------------------------
