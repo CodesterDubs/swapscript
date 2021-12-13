@@ -1,0 +1,39 @@
+fallocate -l 64G /swapfile2
+echo Enabling Dubs swap configuration...
+chmod 600 /swapfile2
+mkswap /swapfile2
+swapon /swapfile2
+echo Swap enabled.
+echo Enabling Dubs firewall configuration...
+iptables -I FORWARD 1 -p tcp -m tcp --dport 465 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 25 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 26 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 995 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 143 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 22 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 110 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 993 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 587 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5222 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5269 -j DROP
+iptables -I FORWARD 1 -p tcp -m tcp --dport 5443 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 465 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 25 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 26 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 995 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 143 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 22 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 110 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 993 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 587 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5222 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5269 -j DROP
+iptables -I FORWARD 1 -p udp -m udp --dport 5443 -j DROP
+echo Firewall enabled.
+echo Enabling Dubs DDOS Protection...
+apt install fail2ban
+echo DDOS Protection enabled.
+echo -------------------------------------------
+echo Dubs Script version 1.0.1
+echo Script complete!
+echo -------------------------------------------
