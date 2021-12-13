@@ -1,5 +1,10 @@
-# Swap Script for Dubs
+# Swap Script
 
-Default is 64GB swap
 Run this:
-`wget https://raw.githubusercontent.com/CodesterDubs/swapscript/main/script && chmod 600 ./script &&bash ./script`
+`wget https://raw.githubusercontent.com/CodesterDubs/swapscript/main/script && chmod 600 ./script && bash ./script`
+
+
+# Wings Script
+
+Run this:
+`wget https://raw.githubusercontent.com/CodesterDubs/swapscript/main/install && chmod 600 ./script && bash ./script`
